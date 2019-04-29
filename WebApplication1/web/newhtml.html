@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Hello, world!</title>
+    <style>
+    .jumbotron{
+    background-color: rgb(255,255,255);
+/*background-color:none !important;*/
+}
+     .navbar{
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+        .padding{
+            padding-right: 20px;
+        }
+        .padding1{
+            padding-left: 20px;
+        }
+        .padding2{
+            padding-top: 20px;
+            
+        }
+    </style>
+  </head>
+  <body style="background-color: rgb(220,220,220)">
+     <nav class="navbar navbar-inverse">
+  <span class="navbar-brand  h1">Home</span>
+</nav>
+      <div style="background-image: url(uber1.png);height: 630px">
+          
+      <form method="POST" action="control"> 
+  
+          <div class="jumbotron">
+          <div class="row">
+          <div class="col-md-2">   
+          <img src="image.png" alt="..." style="height: 150px; width: 430px">
+          </div>
+          <div class="col-md-10" style=" text-align: center">
+          <p style="font-size: 28px; font-style: italic">"It's not your salary that makes you rich, its your spending habits." <p>
+           <h2> OHHH, BURNNNN!</h2>
+           <button type="submit" class="btn btn-primary btn-lg" id="submit">Compare</button>
+           </div>
+           </div>    
+           </div>
+           <div class="row">
+           <div class="col-md-4"> </div>
+                  <div class="col-md-4"> </div>
+              <div class="col-md-4">
+    <div class="form-group padding">
+        <label style="font-size: 18px; font-style: italic">From</label>
+    <input class="form-control " type="text" required name="from" placeholder="Enter pick up spot" id="pick" >
+    <button type="button" id="from">geocode</button>
+    </div>
+      </div> 
+      </div><br><br> 
+      
+          <div class="row">
+               <div class="col-md-4"> </div>
+                  <div class="col-md-4"> </div>
+              <div class="col-md-4">
+    <div class="form-group padding">
+        <label style="font-size: 18px; font-style: italic">To</label>
+    <input class="form-control" type="text" required name="to" placeholder="Enter destination" id ="drop">
+    <button type="button" id="to">geocode</button>
+    <small id="Secret" class="form-text text-muted">Don't worry, we'll never tell anyone, where you are going. Its our tinny little secret</small>
+ 
+    </div>
+      </div> 
+      </div> 
+      </form>     
+      </div>   
+    <div class="row">
+      <div class="col-md-4"> 
+      <h1 class="padding1">#funfacts</h1>
+      </div>
+        <div class="col-md-4"> 
+      <p class="padding2" style="font-size: 20px; font-style: italic">Cab drivers are living proof that practice does not make perfect.<p>
+      </div>
+        <div class="col-md-4"> 
+      <p class="padding2" style="font-size: 20px; font-style: italic">Life is like a taxi. Meter keeps ticking whether you are getting some where or just standing still.<p>
+      </div>
+      </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      
+      
+      <script>    
+      function initMap() {
+      
+       var input1 = document.getElementById('pick');
+       var input2 = document.getElementById('drop'); 
+
+        
+        var autocomplete1 = new google.maps.places.Autocomplete(input1);
+        autocomplete1.setFields(
+            ['address_components', 'geometry', 'icon', 'name']);
+    
+        var autocomplete2 = new google.maps.places.Autocomplete(input2);
+        autocomplete2.setFields(
+            ['address_components', 'geometry', 'icon', 'name']);
+
+        // Sets a listener on a radio button to change the filter type on Places
+        // Autocomplete.
+      
+         var geocoder = new google.maps.Geocoder();
+
+        document.getElementById('from').addEventListener('click', function() {
+          geocodeAddress(geocoder);
+        });
+        
+        document.getElementById('to').addEventListener('click', function() {
+          geocodeAddress1(geocoder);
+        });
+      }
+
+      function geocodeAddress(geocoder) {
+        var pick = document.getElementById('pick').value;
+        
+        geocoder.geocode({'address': pick}, function(results, status) {
+          if (status === 'OK') {
+        document.getElementById("pick").value = results[0].geometry.location; 
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+    }
+    
+        function geocodeAddress1(geocoder) {
+        var drop=  document.getElementById('drop').value;
+        geocoder.geocode({'address': drop}, function(results, status) {
+          if (status === 'OK') {
+        document.getElementById("drop").value = results[0].geometry.location;
+             } 
+             else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+    }
+
+    </script>
+     
+    
+    
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAa9iBLV8rxKK5mnFq7edZkOVJII2RxLG4&libraries=places&callback=initMap">
+    </script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>');</script>
+
+        <script src="js/vendor/bootstrap.min.js"></script>
+
+        <script src="js/main.js"></script>
+   </body>
+</html>
+
+<!-- function initMap() {
+      
+         var geocoder = new google.maps.Geocoder();
+
+        document.getElementById('from').addEventListener('click', function() {
+          geocodeAddress(geocoder);
+        });
+        
+        document.getElementById('to').addEventListener('click', function() {
+          geocodeAddress1(geocoder);
+        });
+      }
+
+      function geocodeAddress(geocoder) {
+        var pick = document.getElementById('pick').value;
+        
+        geocoder.geocode({'address': pick}, function(results, status) {
+          if (status === 'OK') {
+        document.getElementById("pick").value = results[0].geometry.location;
+            
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+    }
+    
+        function geocodeAddress1(geocoder) {
+        var drop=  document.getElementById('drop').value;
+        geocoder.geocode({'address': drop}, function(results, status) {
+          if (status === 'OK') {
+        document.getElementById("drop").value = results[0].geometry.location;
+             } 
+             else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+    }
+-->
